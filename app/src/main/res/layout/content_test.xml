@@ -9,17 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="snoozinc.snoozinator.MainActivity"
-    tools:showIn="@layout/activity_main"
-    android:onClick="bla">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/test"
-        android:id="@+id/button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="bla" />
+    tools:context="snoozinc.snoozinator.TestActivity"
+    tools:showIn="@layout/activity_test">
 
 </RelativeLayout>
