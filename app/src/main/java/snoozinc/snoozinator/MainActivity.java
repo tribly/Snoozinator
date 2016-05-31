@@ -100,9 +100,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public View.OnClickListener deleteAlarmButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
-            alarmTableScrollView.removeView((View) v.getParent());
-
+            alarmTableScrollView.removeView((View) v.getParent().getParent());
         }
     };
 
