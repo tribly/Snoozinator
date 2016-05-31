@@ -14,20 +14,12 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:id="@+id/addAlarmButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_alarm_button"
-        android:layout_marginBottom="45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
         android:id="@+id/deleteAllAlarmsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/deleteAllAlarm"
-        android:layout_alignBottom="@+id/addAlarmButton"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <ScrollView
@@ -36,14 +28,13 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/addAlarmButton" >
+        android:layout_above="@+id/deleteAllAlarmsButton" >
 
         <TableLayout
             android:id="@+id/alarmTableScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="yes" >
-
         </TableLayout>
 
     </ScrollView>
