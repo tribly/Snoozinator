@@ -44,10 +44,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         alarmTableScrollView = (TableLayout) findViewById(R.id.alarmTableScrollView);
 
-//        addAlarmButton = (Button) findViewById(R.id.addAlarmButton);
         deleteAllAlarmsButton = (Button)  findViewById(R.id.deleteAllAlarmsButton);
 
-//        addAlarmButton.setOnClickListener(addAlarmButtonListener);
         deleteAllAlarmsButton.setOnClickListener(deleteAllAlarmsButtonListener);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -91,16 +89,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         alarmTableScrollView.addView(newAlarm);
     }
-
-    public View.OnClickListener addAlarmButtonListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            insertAlarmInScrollView();
-        }
-    };
-
-
-
 
     public View.OnClickListener deleteAllAlarmsButtonListener = new View.OnClickListener() {
         @Override
