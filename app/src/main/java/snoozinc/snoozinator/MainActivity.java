@@ -2,19 +2,25 @@ package snoozinc.snoozinator;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Button;
 import android.widget.TableLayout;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
@@ -94,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         });
 
         alarmTableScrollView.addView(newAlarm);
-
     }
 
     @Override
@@ -118,5 +123,4 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         return super.onOptionsItemSelected(item);
     }
-
 }

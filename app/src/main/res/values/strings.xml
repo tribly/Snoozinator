@@ -13,4 +13,5 @@
     <string name="sun">Sun</string>
     <string name="deleteAlarm">Delete</string>
     <string name="deleteAllAlarm">Delete all</string>
+    <string name="placeHolderTime">00:00</string>
 </resources>
