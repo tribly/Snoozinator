@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,11 +27,13 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
     private SharedPreferences allAlarms;
+    private FloatingActionButton fab;
 
     TableLayout alarmTableScrollView;
 
     Button addAlarmButton;
     Button deleteAllAlarmsButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +44,19 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         alarmTableScrollView = (TableLayout) findViewById(R.id.alarmTableScrollView);
 
-        addAlarmButton = (Button) findViewById(R.id.addAlarmButton);
+//        addAlarmButton = (Button) findViewById(R.id.addAlarmButton);
         deleteAllAlarmsButton = (Button)  findViewById(R.id.deleteAllAlarmsButton);
 
-        addAlarmButton.setOnClickListener(addAlarmButtonListener);
+//        addAlarmButton.setOnClickListener(addAlarmButtonListener);
         deleteAllAlarmsButton.setOnClickListener(deleteAllAlarmsButtonListener);
 
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                insertAlarmInScrollView();
+            }
+        });
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfDay) {
@@ -55,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         * hitting the 'OK' button
         * */
         if (view.isShown()) {
-            TextView textView = (TextView) findViewById(R.id.alarm_time);
+            TextView textView = (TextView) findViewById(R.id.alarmDisplayTextView);
             /*
             * Format the hour and minute so that we have leading zeroes
             * */
@@ -80,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         deleteAlarmButton.setOnClickListener(deleteAlarmButtonListener);
 
         alarmTableScrollView.addView(newAlarm);
-
     }
 
     public View.OnClickListener addAlarmButtonListener = new View.OnClickListener() {
@@ -89,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             insertAlarmInScrollView();
         }
     };
+
+
+
 
     public View.OnClickListener deleteAllAlarmsButtonListener = new View.OnClickListener() {
         @Override

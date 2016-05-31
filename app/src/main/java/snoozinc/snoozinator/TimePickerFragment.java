@@ -35,6 +35,4 @@ public class TimePickerFragment extends DialogFragment {
         return new TimePickerDialog(mActivity, mListener, hour, minute,
                                     DateFormat.is24HourFormat(mActivity));
     }
-
-
 }
