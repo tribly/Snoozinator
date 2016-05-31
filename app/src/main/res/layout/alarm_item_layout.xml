@@ -15,8 +15,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="00:00"
-        android:textSize="35dp"
-        android:onClick="showTimePicker"/>
+        android:textSize="35dp"/>
 
     <LinearLayout
         android:id="@+id/alarm_days"

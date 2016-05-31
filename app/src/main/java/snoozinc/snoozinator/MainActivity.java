@@ -2,37 +2,28 @@ package snoozinc.snoozinator;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
-    private SharedPreferences allAlarms;
-    private FloatingActionButton fab;
+    private FloatingActionButton addAlarmFab;
 
-    TableLayout alarmTableScrollView;
+    private TableLayout alarmTableScrollView;
 
-    Button addAlarmButton;
-    Button deleteAllAlarmsButton;
+    private Button deleteAllAlarmsButton;
 
 
     @Override
@@ -45,11 +36,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         alarmTableScrollView = (TableLayout) findViewById(R.id.alarmTableScrollView);
 
         deleteAllAlarmsButton = (Button)  findViewById(R.id.deleteAllAlarmsButton);
+        addAlarmFab = (FloatingActionButton) findViewById(R.id.addAlarmFab);
 
-        deleteAllAlarmsButton.setOnClickListener(deleteAllAlarmsButtonListener);
+        deleteAllAlarmsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alarmTableScrollView.removeAllViews();
+            }
+        });
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        addAlarmFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 insertAlarmInScrollView();
@@ -73,36 +69,33 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         }
     }
 
-    public void showTimePicker(View v) {
-        TimePickerFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
-    }
-
     private void insertAlarmInScrollView(){
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View newAlarm = inflater.inflate(R.layout.alarm_item_layout, null);
 
+        TextView alarmDisplayTextView = (TextView) newAlarm.findViewById(R.id.alarmDisplayTextView);
         Button deleteAlarmButton = (Button) newAlarm.findViewById(R.id.deleteAlarmButton);
-        deleteAlarmButton.setOnClickListener(deleteAlarmButtonListener);
+
+        alarmDisplayTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerFragment newFragment = new TimePickerFragment();
+                newFragment.show(getFragmentManager(), "timePicker");
+            }
+        });
+
+        deleteAlarmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alarmTableScrollView.removeView((View) v.getParent().getParent());
+            }
+        });
 
         alarmTableScrollView.addView(newAlarm);
+
     }
-
-    public View.OnClickListener deleteAllAlarmsButtonListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            alarmTableScrollView.removeAllViews();
-        }
-    };
-
-    public View.OnClickListener deleteAlarmButtonListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            alarmTableScrollView.removeView((View) v.getParent().getParent());
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
