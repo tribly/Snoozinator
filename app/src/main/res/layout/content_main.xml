@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -14,4 +14,40 @@
     tools:showIn="@layout/activity_main">
 
     <include layout="@layout/alarm_list_item_layout" />
-</LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_alarm_button"
+        android:id="@+id/addAlarmButton"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteAllAlarm"
+        android:id="@+id/deleteAllAlarmsButton"
+        android:layout_alignBottom="@+id/addAlarmButton"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/alarmScrollView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/addAlarmButton" >
+
+        <TableLayout
+            android:id="@+id/alarmTableScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="yes" >
+
+        </TableLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

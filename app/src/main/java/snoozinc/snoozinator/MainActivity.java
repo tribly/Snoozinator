@@ -1,17 +1,36 @@
 package snoozinc.snoozinator;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Switch;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
+
+    private SharedPreferences allAlarms;
+
+    TableLayout alarmTableScrollView;
+
+    Button addAlarmButton;
+    Button deleteAllAlarmsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +38,15 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        alarmTableScrollView = (TableLayout) findViewById(R.id.alarmTableScrollView);
+
+        addAlarmButton = (Button) findViewById(R.id.addAlarmButton);
+        deleteAllAlarmsButton = (Button)  findViewById(R.id.deleteAllAlarmsButton);
+
+        addAlarmButton.setOnClickListener(addAlarmButtonListener);
+        deleteAllAlarmsButton.setOnClickListener(deleteAllAlarmsButtonListener);
+
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfDay) {
@@ -42,6 +70,42 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
+    private void insertAlarmInScrollView(){
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View newAlarm = inflater.inflate(R.layout.alarm_item_layout, null);
+
+        Button deleteAlarmButton = (Button) newAlarm.findViewById(R.id.deleteAlarmButton);
+        deleteAlarmButton.setOnClickListener(deleteAlarmButtonListener);
+
+        alarmTableScrollView.addView(newAlarm);
+
+    }
+
+    public View.OnClickListener addAlarmButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            insertAlarmInScrollView();
+        }
+    };
+
+    public View.OnClickListener deleteAllAlarmsButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            alarmTableScrollView.removeAllViews();
+        }
+    };
+
+    public View.OnClickListener deleteAlarmButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            alarmTableScrollView.removeView((View) v.getParent());
+
+        }
+    };
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,4 +127,5 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         return super.onOptionsItemSelected(item);
     }
+
 }

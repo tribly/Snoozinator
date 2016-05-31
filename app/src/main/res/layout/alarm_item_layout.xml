@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:weightSum="1">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="00:00"
+            android:id="@+id/alarmDisplayTextView"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnSpan="7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/mon"
+            android:id="@+id/monTextView"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/tue"
+            android:id="@+id/tueTextView"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_row="1"
+            android:layout_column="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/wed"
+            android:id="@+id/wedTextView"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_row="1"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/thu"
+            android:id="@+id/thuTextView"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_row="1"
+            android:layout_column="3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/fri"
+            android:id="@+id/friTextView"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_row="1"
+            android:layout_column="4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/sat"
+            android:id="@+id/satTextView"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_row="1"
+            android:layout_column="5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/sun"
+            android:id="@+id/sunTextView"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_row="1"
+            android:layout_column="6" />
+
+    </GridLayout>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggleAlarmSwitch"
+        android:gravity="center_horizontal"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_margin="5dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteAlarm"
+        android:id="@+id/deleteAlarmButton"
+        android:layout_weight="1"
+        android:layout_margin="5dp" />
+
+</TableRow>
