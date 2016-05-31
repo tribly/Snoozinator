@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -27,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     Button addAlarmButton;
     Button deleteAllAlarmsButton;
 
-    int id;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         addAlarmButton = (Button) findViewById(R.id.addAlarmButton);
         deleteAllAlarmsButton = (Button)  findViewById(R.id.deleteAllAlarmsButton);
-
-        id = 0;
 
         addAlarmButton.setOnClickListener(addAlarmButtonListener);
         deleteAllAlarmsButton.setOnClickListener(deleteAllAlarmsButtonListener);
@@ -57,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Button deleteAlarmButton = (Button) newAlarm.findViewById(R.id.deleteAlarmButton);
         deleteAlarmButton.setOnClickListener(deleteAlarmButtonListener);
 
-        alarmTableScrollView.addView(newAlarm, id++);
+        alarmTableScrollView.addView(newAlarm);
 
     }
 
@@ -72,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             alarmTableScrollView.removeAllViews();
-            id = 0;
         }
     };
 
@@ -80,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            alarmTableScrollView.removeViewAt(--id);
+            alarmTableScrollView.removeView((View) v.getParent());
 
         }
     };
