@@ -10,16 +10,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="snoozinc.snoozinator.MainActivity"
-    tools:showIn="@layout/activity_main"
-    android:onClick="bla">
+    tools:showIn="@layout/activity_main">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test"
-        android:id="@+id/button"
-        android:layout_centerVertical="true"
+        android:text="@string/add_alarm_button"
+        android:id="@+id/addAlarmButton"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteAllAlarm"
+        android:id="@+id/deleteAllAlarmsButton"
+        android:layout_alignBottom="@+id/addAlarmButton"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/alarmScrollView"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:onClick="bla" />
+        android:layout_above="@+id/addAlarmButton" >
+
+        <TableLayout
+            android:id="@+id/alarmTableScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="yes" >
+
+        </TableLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

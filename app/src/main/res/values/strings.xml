@@ -3,4 +3,14 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="test">Test</string>
+    <string name="add_alarm_button">Add</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="deleteAlarm">Delete</string>
+    <string name="deleteAllAlarm">Delete all</string>
 </resources>
