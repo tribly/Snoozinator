@@ -118,9 +118,18 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         View newAlarm = inflater.inflate(R.layout.alarm_item_layout, null);
 
+        RelativeLayout alarmRelativeLayout = (RelativeLayout) findViewById(R.id.alarmRelativeLayout);
         TextView alarmDisplayTextView = (TextView) newAlarm.findViewById(R.id.alarmDisplayTextView);
         Button deleteAlarmButton = (Button) newAlarm.findViewById(R.id.deleteAlarmButton);
         Switch toggleAlarmSwitch = (Switch) newAlarm.findViewById(R.id.toggleAlarmSwitch);
+
+        alarmRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AlarmItemSettings.class);
+                startActivity(intent);
+            }
+        });
 
         alarmDisplayTextView.setOnClickListener(new View.OnClickListener() {
             @Override
