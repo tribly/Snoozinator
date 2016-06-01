@@ -16,6 +16,7 @@ import android.support.annotation.Nullable;
 public class RingtonePlayingService extends Service {
     private Context context;
     MediaPlayer mediaPlayer;
+    private Ringtone ringtone;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -30,14 +31,15 @@ public class RingtonePlayingService extends Service {
             alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
 
-        Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
+        this.ringtone = RingtoneManager.getRingtone(this, alarmUri);
         ringtone.play();
 
-        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        ringtone.stop();
     }
 }

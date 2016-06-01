@@ -100,17 +100,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        int interval = 10000;
 
-        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                                    interval, pendingIntent);
+        manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
         Toast.makeText(this, "Alarm set for " + hour + ":" + minute, Toast.LENGTH_SHORT).show();
-    }
-
-    public void showTimePicker(View v) {
-        TimePickerFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
     }
 
     private void insertAlarmInScrollView(){
@@ -118,10 +111,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         View newAlarm = inflater.inflate(R.layout.alarm_item_layout, null);
 
-        RelativeLayout alarmRelativeLayout = (RelativeLayout) findViewById(R.id.alarmRelativeLayout);
+        RelativeLayout alarmRelativeLayout = (RelativeLayout) newAlarm.findViewById(R.id.alarmRelativeLayout);
         TextView alarmDisplayTextView = (TextView) newAlarm.findViewById(R.id.alarmDisplayTextView);
         Button deleteAlarmButton = (Button) newAlarm.findViewById(R.id.deleteAlarmButton);
-        Switch toggleAlarmSwitch = (Switch) newAlarm.findViewById(R.id.toggleAlarmSwitch);
+        final Switch toggleAlarmSwitch = (Switch) newAlarm.findViewById(R.id.toggleAlarmSwitch);
 
         alarmRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             public void onClick(View v) {
                 TimePickerFragment newFragment = new TimePickerFragment();
                 newFragment.show(getFragmentManager(), "timePicker");
+                toggleAlarmSwitch.setChecked(true);
             }
         });
 
@@ -152,7 +146,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 if (isChecked) {
                     //TODO: set toggle on
                  }else {
-                    //TODO: set toggle off
+                    Intent stopIntent = new Intent(MainActivity.this, RingtonePlayingService.class);
+                    MainActivity.this.stopService(stopIntent);
                 }
             }
         });
