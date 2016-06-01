@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Button;
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         TextView alarmDisplayTextView = (TextView) newAlarm.findViewById(R.id.alarmDisplayTextView);
         Button deleteAlarmButton = (Button) newAlarm.findViewById(R.id.deleteAlarmButton);
+        Switch toggleAlarmSwitch = (Switch) newAlarm.findViewById(R.id.toggleAlarmSwitch);
 
         alarmDisplayTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +99,17 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             @Override
             public void onClick(View v) {
                 alarmTableScrollView.removeView((View) v.getParent().getParent());
+            }
+        });
+
+        toggleAlarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                 }else {
+
+                }
             }
         });
 
