@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                                     interval, pendingIntent);
+
+        Toast.makeText(this, "Alarm set for " + hour + ":" + minute, Toast.LENGTH_SHORT).show();
     }
 
     public void showTimePicker(View v) {
