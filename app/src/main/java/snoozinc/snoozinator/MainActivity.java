@@ -141,9 +141,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    //TODO: set toggle on
                  }else {
-
+                    //TODO: set toggle off
                 }
             }
         });
