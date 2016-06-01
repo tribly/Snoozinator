@@ -1,10 +1,14 @@
 package snoozinc.snoozinator;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,16 +26,21 @@ import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
+
+    private PendingIntent pendingIntent;
+    private Intent alarmIntent;
 
     private SharedPreferences allAlarms;
     private FloatingActionButton fab;
 
     TableLayout alarmTableScrollView;
 
-    Button addAlarmButton;
     Button deleteAllAlarmsButton;
 
 
@@ -55,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 insertAlarmInScrollView();
             }
         });
+
+        alarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfDay) {
@@ -70,7 +82,20 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             String hour = String.format("%02d", hourOfDay);
             String minute = String.format("%02d", minuteOfDay);
             textView.setText(hour + ":" + minute);
+
+            startAlarm(hourOfDay, minuteOfDay);
         }
+    }
+
+    public void startAlarm(int hour, int minute) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        int interval = 10000;
+
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                                    interval, pendingIntent);
     }
 
     public void showTimePicker(View v) {
@@ -79,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     private void insertAlarmInScrollView(){
-
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View newAlarm = inflater.inflate(R.layout.alarm_item_layout, null);
@@ -88,6 +112,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         deleteAlarmButton.setOnClickListener(deleteAlarmButtonListener);
 
         alarmTableScrollView.addView(newAlarm);
+
+        Switch toggleAlarmSwitch = (Switch) newAlarm.findViewById(R.id.toggleAlarmSwitch);
+
+        toggleAlarmSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                manager.cancel(pendingIntent);
+            }
+        });
     }
 
     public View.OnClickListener deleteAllAlarmsButtonListener = new View.OnClickListener() {
@@ -96,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             alarmTableScrollView.removeAllViews();
         }
     };
+
+
 
     public View.OnClickListener deleteAlarmButtonListener = new View.OnClickListener() {
         @Override
