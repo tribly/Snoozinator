@@ -85,31 +85,12 @@
             android:text="@string/sun"
             android:id="@+id/sunTextView"
             android:layout_marginRight="5dp" />
-
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/temp_container"
-        android:layout_toRightOf="@id/alarm_days"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/deleteAlarmButton"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deleteAlarm"/>
-
-        <Switch
-            android:id="@+id/toggleAlarmSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_margin="5dp" />
-
-    </LinearLayout>
-
+    <Switch
+        android:id="@+id/toggleAlarmSwitch"
+        android:layout_alignParentEnd="@id/alarm_days"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical" />
 </RelativeLayout>

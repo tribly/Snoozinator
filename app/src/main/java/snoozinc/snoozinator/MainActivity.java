@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     private Button deleteAllAlarmsButton;
 
+    // Save the movement on slide
+    float historicX = Float.NaN;
+    // Distance to register the slide
+    static final int DELTA = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         RelativeLayout alarmRelativeLayout = (RelativeLayout) newAlarm.findViewById(R.id.alarmRelativeLayout);
         TextView alarmDisplayTextView = (TextView) newAlarm.findViewById(R.id.alarmDisplayTextView);
-        Button deleteAlarmButton = (Button) newAlarm.findViewById(R.id.deleteAlarmButton);
         final Switch toggleAlarmSwitch = (Switch) newAlarm.findViewById(R.id.toggleAlarmSwitch);
 
         alarmRelativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -124,19 +128,37 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             }
         });
 
+        /**
+         * Register a slide to remove listener
+         */
+        alarmRelativeLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        historicX = event.getX();
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        if (event.getX() - historicX < -DELTA) {
+                            alarmTableScrollView.removeView(v);
+                            Toast.makeText(getBaseContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                        break;
+
+                    default: return false;
+                }
+                return false;
+            }
+        });
+
         alarmDisplayTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerFragment newFragment = new TimePickerFragment();
                 newFragment.show(getFragmentManager(), "timePicker");
                 toggleAlarmSwitch.setChecked(true);
-            }
-        });
-
-        deleteAlarmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alarmTableScrollView.removeView((View) v.getParent().getParent());
             }
         });
 
