@@ -4,9 +4,10 @@
     android:id="@+id/alarmRelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:paddingLeft="10dp"
-    android:paddingTop="10dp"
-    android:paddingRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
     android:background="@android:color/transparent">
 
     <TextView
@@ -84,12 +85,20 @@
             android:text="@string/sun"
             android:id="@+id/sunTextView"
             android:layout_marginRight="5dp" />
+
     </LinearLayout>
 
-    <Switch
-        android:id="@+id/toggleAlarmSwitch"
-        android:layout_alignParentEnd="@id/alarm_days"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical" />
+    <LinearLayout
+        android:id="@+id/temp_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true">
+
+        <Switch
+            android:id="@+id/toggleAlarmSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 </RelativeLayout>
